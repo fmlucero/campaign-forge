@@ -61,7 +61,7 @@ export default function PreviewArea() {
                 >
                   <Sparkles className="w-4 h-4" /> AI Generated Campaign
                 </motion.div>
-                <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight max-w-4xl text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
+                <h1 className="text-4xl md:text-6xl font-outfit font-extrabold mb-6 tracking-tight max-w-4xl text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">
                   {landingData.hero.headline}
                 </h1>
                 <p className="text-lg md:text-2xl text-slate-300 max-w-2xl mb-10 font-light leading-relaxed">
@@ -77,7 +77,7 @@ export default function PreviewArea() {
               <div className="w-full bg-white dark:bg-slate-950 py-24 px-6 sm:px-12">
                 <div className="max-w-4xl mx-auto">
                   <div className="text-center mb-16">
-                    <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-4">Why choose us?</h2>
+                    <h2 className="text-3xl font-outfit font-bold text-slate-900 dark:text-white mb-4">Why choose us?</h2>
                     <p className="text-slate-500 dark:text-slate-400 text-lg">Everything you need to scale fast and reach your goals.</p>
                   </div>
                   <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -92,7 +92,7 @@ export default function PreviewArea() {
                         <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center mb-5">
                           <CheckCircle2 className="w-6 h-6" />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-3">{feature.title}</h3>
+                        <h3 className="text-xl font-outfit font-bold text-slate-900 dark:text-white mb-3">{feature.title}</h3>
                         <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{feature.description}</p>
                       </motion.div>
                     ))}
@@ -104,7 +104,7 @@ export default function PreviewArea() {
               <div className="w-full bg-blue-50 dark:bg-blue-950/20 py-24 px-6">
                 <div className="max-w-3xl mx-auto text-center">
                   <Quote className="w-12 h-12 text-blue-300 dark:text-blue-800 mx-auto mb-8 opacity-50" />
-                  <h3 className="text-2xl md:text-3xl font-medium text-slate-900 dark:text-white mb-8 leading-relaxed">
+                  <h3 className="text-2xl md:text-3xl font-outfit font-medium text-slate-900 dark:text-white mb-8 leading-relaxed">
                     "{landingData.socialProof.quote}"
                   </h3>
                   <div className="flex items-center justify-center gap-4">
@@ -123,7 +123,7 @@ export default function PreviewArea() {
                   <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-blue-500 blur-3xl opacity-20 pointer-events-none" />
                   <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-64 h-64 rounded-full bg-indigo-500 blur-3xl opacity-20 pointer-events-none" />
                   
-                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 relative z-10">
+                  <h2 className="text-3xl md:text-5xl font-outfit font-bold text-white mb-8 relative z-10">
                     {landingData.footerCta.headline}
                   </h2>
                   <button className="bg-white text-slate-900 hover:bg-slate-100 px-8 py-4 rounded-full font-semibold text-lg transition-transform transform hover:scale-105 relative z-10 shadow-lg">
