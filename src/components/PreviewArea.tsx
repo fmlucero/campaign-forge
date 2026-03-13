@@ -4,13 +4,23 @@ import { useCampaignStore } from "@/store/useCampaignStore";
 import { Presentation, Quote, ArrowRight, Shield, Zap, Target, TrendingUp, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+const fontMap: Record<string, string> = {
+  inter: 'font-inter',
+  outfit: 'font-outfit',
+  playfair: 'font-playfair',
+  spaceGrotesk: 'font-space-grotesk',
+  jakarta: 'font-jakarta'
+};
+
 export default function PreviewArea() {
   const { landingData, isGenerating } = useCampaignStore();
+
+  const currentFontClass = landingData ? (fontMap[landingData.theme.fontFamily] || 'font-sans') : 'font-sans';
 
   return (
     <div className="h-full w-full overflow-y-auto p-4 md:p-8">
       <div 
-        className="max-w-5xl mx-auto min-h-[80vh] rounded-2xl shadow-xl overflow-hidden relative transition-colors duration-500 font-sans"
+        className={`max-w-5xl mx-auto min-h-[80vh] rounded-2xl shadow-xl overflow-hidden relative transition-colors duration-500 ${currentFontClass}`}
         style={landingData ? {
           '--theme-primary': landingData.theme.primaryColor,
           '--theme-secondary': landingData.theme.secondaryColor,
@@ -61,7 +71,7 @@ export default function PreviewArea() {
               className="w-full flex flex-col"
             >
               <div 
-                className={`w-full flex-1 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 font-${landingData.theme.fontFamily}`}
+                className={`w-full flex-1 flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32`}
                 style={{
                   background: `linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 10%, ${landingData.theme.backgroundColor}) 0%, ${landingData.theme.backgroundColor} 100%)`,
                   color: landingData.theme.textColor
@@ -101,7 +111,7 @@ export default function PreviewArea() {
 
               {/* Features Section */}
               <div 
-                className={`w-full py-24 px-6 sm:px-12 font-${landingData.theme.fontFamily}`}
+                className={`w-full py-24 px-6 sm:px-12`}
                 style={{ backgroundColor: landingData.theme.backgroundColor }}
               >
                 <div className="max-w-4xl mx-auto">
@@ -141,7 +151,7 @@ export default function PreviewArea() {
 
               {/* Testimonial Section */}
               <div 
-                className={`w-full py-24 px-6 font-${landingData.theme.fontFamily}`}
+                className={`w-full py-24 px-6`}
                 style={{
                   backgroundColor: 'color-mix(in srgb, var(--theme-primary) 8%, transparent)'
                 }}
@@ -171,7 +181,7 @@ export default function PreviewArea() {
 
               {/* Footer CTA */}
               <div 
-                className={`w-full py-24 px-6 text-center font-${landingData.theme.fontFamily}`}
+                className={`w-full py-24 px-6 text-center`}
                 style={{ backgroundColor: landingData.theme.backgroundColor }}
               >
                 <div 
