@@ -16,11 +16,11 @@ In fast-paced creative and technical environments, moving from concept to launch
 
 ## ⚙️ Key Technical Features
 
-- **Dynamic AI Theming:** The LLM acts as an Art Director, analyzing the brief to suggest a tailored color palette (Primary & Secondary HEX) and typography pairing. The UI consumes these tokens dynamically via CSS Variables and inline React styles.
-- **Auto-Localization:** Prompt Engineering forces the AI to detect the input language of the brief, automatically localizing all generated copy and UI labels (e.g., "Why choose us?") to match the user's language without hardcoded dictionaries.
-- **Strict Prompt Orchestration:** Uses complex, structured prompt engineering (schema-driven outputs) to guarantee strictly typed JSON outputs from Gemini 2.5 Flash, seamlessly populating the frontend UI components without parsing errors.
-- **Rapid Prototyping Engine:** Provides a real-time, interactive preview of landing page layouts based on the AI-generated content.
-- **Responsive & Usable:** Focuses on a frictionless developer/marketer experience with a clean, modern interface and glassmorphic micro-interactions, styled like a premium SaaS dashboard.
+- **Extreme AI Theming (V3):** The model acts as an Art Director, analyzing the input text to forge a complete aesthetic profile. It dynamically returns a full HEX color palette (adjusting for Dark/Light mode), dynamic `borderRadius` modifiers, and selects the ideal Google Font pairing for the specific industry. 
+- **Auto-Localization:** Utilizing advanced Prompt Engineering, the AI detects the language of the provided brief and flawlessly localizes all generated landing page copy and UI elements specifically for that region, eliminating the need for hardcoded dictionaries.
+- **Strict Schema Orchestration:** Employs the `@google/genai` SDK with strict `responseSchema` structures to guarantee strictly typed JSON outputs from the blistering fast **Gemini 3.1 Flash-Lite** model.
+- **Dynamic JIT Tailwind Compilation:** UI consumes AI-generated tokens via standard React inline styles and a strict font mapping dictionary to safely inject `next/font` variables (`Inter`, `Outfit`, `Playfair`, `Space Grotesk`, `Jakarta`) directly into the Tailwind V4 compilation layer.
+- **Glassmorphic Editor:** The main control panel features a modern, premium "Dark SaaS" aesthetic with subtle borders and shadows to reduce cognitive load while managing complex prompts.
 
 ## 🛠️ Getting Started
 
