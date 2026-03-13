@@ -21,6 +21,12 @@ export async function POST(request: Request) {
 You are an expert digital marketing copywriter and conversion rate optimization specialist.
 I need you to generate a high-converting landing page copy based on the following brief.
 
+CRUCIAL INSTRUCTION ON LANGUAGE:
+Detect the language of the provided brief and generate all the landing page copy (including titles, subtitles, and UI labels) STRICTLY in that same language. Do not mix languages.
+
+CRUCIAL INSTRUCTION ON THEMING:
+Based on the brand and product, suggest a "theme" tailored to them. Include a modern primary and secondary HEX color, and suggest a modern font pairing style.
+
 Brief Details:
 - Brand Name: ${brief.brand}
 - Product/Service: ${brief.product}
@@ -36,6 +42,15 @@ Your response must be carefully crafted to maximize conversions for the stated g
         landingPage: {
           type: Type.OBJECT,
           properties: {
+            theme: {
+              type: Type.OBJECT,
+              properties: {
+                primaryColor: { type: Type.STRING, description: "A primary HEX color code (e.g. '#3b82f6')" },
+                secondaryColor: { type: Type.STRING, description: "A complementary secondary HEX color code" },
+                fontFamily: { type: Type.STRING, description: "Font style suggestion: 'sans', 'serif', or 'mono'" }
+              },
+              required: ["primaryColor", "secondaryColor", "fontFamily"]
+            },
             hero: {
               type: Type.OBJECT,
               properties: {
@@ -45,6 +60,8 @@ Your response must be carefully crafted to maximize conversions for the stated g
               },
               required: ["headline", "subheadline", "ctaText"]
             },
+            featuresTitle: { type: Type.STRING, description: "Title for the features section, e.g. 'Why choose us?' localized" },
+            featuresSubtitle: { type: Type.STRING, description: "Subtitle for the features section localized" },
             features: {
               type: Type.ARRAY,
               items: {
@@ -52,7 +69,7 @@ Your response must be carefully crafted to maximize conversions for the stated g
                 properties: {
                   title: { type: Type.STRING, description: "Feature or benefit title" },
                   description: { type: Type.STRING, description: "Short description of the feature" },
-                  icon: { type: Type.STRING, description: "Name of an icon (e.g. 'Shield', 'Zap', 'Target', 'TrendingUp')" }
+                  icon: { type: Type.STRING, description: "Name of an icon from Lucide" }
                 },
                 required: ["title", "description", "icon"]
               },
@@ -76,7 +93,7 @@ Your response must be carefully crafted to maximize conversions for the stated g
               required: ["headline", "buttonText"]
             }
           },
-          required: ["hero", "features", "socialProof", "footerCta"]
+          required: ["theme", "hero", "featuresTitle", "featuresSubtitle", "features", "socialProof", "footerCta"]
         }
       },
       required: ["landingPage"]

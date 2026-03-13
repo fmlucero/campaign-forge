@@ -1,11 +1,18 @@
 import { create } from "zustand";
 
 export interface LandingData {
+  theme: {
+    primaryColor: string;
+    secondaryColor: string;
+    fontFamily: string;
+  };
   hero: {
     headline: string;
     subheadline: string;
     ctaText: string;
   };
+  featuresTitle: string;
+  featuresSubtitle: string;
   features: Array<{ title: string; description: string; icon: string }>;
   socialProof: {
     quote: string;

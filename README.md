@@ -16,10 +16,11 @@ In fast-paced creative and technical environments, moving from concept to launch
 
 ## ⚙️ Key Technical Features
 
-- **Prompt Orchestration:** Uses complex, structured prompt engineering (schema-driven outputs) to guarantee strictly typed JSON outputs from the LLM, seamlessly populating the frontend UI components without parsing errors.
+- **Dynamic AI Theming:** The LLM acts as an Art Director, analyzing the brief to suggest a tailored color palette (Primary & Secondary HEX) and typography pairing. The UI consumes these tokens dynamically via CSS Variables and inline React styles.
+- **Auto-Localization:** Prompt Engineering forces the AI to detect the input language of the brief, automatically localizing all generated copy and UI labels (e.g., "Why choose us?") to match the user's language without hardcoded dictionaries.
+- **Strict Prompt Orchestration:** Uses complex, structured prompt engineering (schema-driven outputs) to guarantee strictly typed JSON outputs from Gemini 2.5 Flash, seamlessly populating the frontend UI components without parsing errors.
 - **Rapid Prototyping Engine:** Provides a real-time, interactive preview of landing page layouts based on the AI-generated content.
-- **API Extensibility:** Built with a modular service layer, ensuring the application can easily integrate with external systems (e.g., CRMs, project management tools, or analytics solutions).
-- **Responsive & Usable:** Focuses on a frictionless developer/marketer experience with a clean, modern interface and glassmorphic micro-interactions.
+- **Responsive & Usable:** Focuses on a frictionless developer/marketer experience with a clean, modern interface and glassmorphic micro-interactions, styled like a premium SaaS dashboard.
 
 ## 🛠️ Getting Started
 
