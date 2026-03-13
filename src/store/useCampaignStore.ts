@@ -4,7 +4,10 @@ export interface LandingData {
   theme: {
     primaryColor: string;
     secondaryColor: string;
-    fontFamily: string;
+    backgroundColor: string;
+    textColor: string;
+    fontFamily: 'inter' | 'outfit' | 'playfair' | 'spaceGrotesk' | 'jakarta';
+    borderRadius: 'none' | 'sm' | 'md' | 'full';
   };
   hero: {
     headline: string;

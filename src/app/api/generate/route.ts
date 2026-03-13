@@ -18,14 +18,20 @@ export async function POST(request: Request) {
     }
 
     const prompt = `
-You are an expert digital marketing copywriter and conversion rate optimization specialist.
+You are an expert digital marketing copywriter and conversion rate optimization specialist, acting as both an Art Director and a Copywriter.
 I need you to generate a high-converting landing page copy based on the following brief.
 
 CRUCIAL INSTRUCTION ON LANGUAGE:
 Detect the language of the provided brief and generate all the landing page copy (including titles, subtitles, and UI labels) STRICTLY in that same language. Do not mix languages.
 
-CRUCIAL INSTRUCTION ON THEMING:
-Based on the brand and product, suggest a "theme" tailored to them. Include a modern primary and secondary HEX color, and suggest a modern font pairing style.
+CRUCIAL INSTRUCTION ON THEMING (V3 Extreme Adaptability):
+Instead of just a primary color, you must design a complete, cohesive theme tailored to the product's identity. 
+- You must decide if the landing page should be dark mode or light mode based on the industry.
+- Return a full HEX color palette including: primaryColor, secondaryColor, backgroundColor, and textColor.
+- If it's a dark theme, backgroundColor should be dark (e.g., #0f172a) and textColor light (e.g., #f1f5f9). 
+- If it's a light theme, backgroundColor should be bright (e.g., #f8fafc) and textColor dark (e.g., #0f172a).
+- Select a specific font pairing ('inter', 'outfit', 'playfair', 'spaceGrotesk', or 'jakarta') that best matches the brand vibe. For example, 'playfair' for luxury/fashion, 'spaceGrotesk' for cutting-edge tech.
+- Decide the 'borderRadius' for buttons and cards: 'none' (sharp, brutalist, high-end fashion), 'sm' (standard tech), 'md' (friendly SaaS), or 'full' (modern consumer apps).
 
 Brief Details:
 - Brand Name: ${brief.brand}
@@ -33,7 +39,7 @@ Brief Details:
 - Primary Goal: ${brief.goal}
 - Target Audience & Key Benefits: ${brief.target}
 
-Your response must be carefully crafted to maximize conversions for the stated goal.
+Your response must be extremely tailored to maximize conversions, adopting the correct aesthetic profile for the stated goal.
 `;
 
     const responseSchema = {
@@ -47,9 +53,12 @@ Your response must be carefully crafted to maximize conversions for the stated g
               properties: {
                 primaryColor: { type: Type.STRING, description: "A primary HEX color code (e.g. '#3b82f6')" },
                 secondaryColor: { type: Type.STRING, description: "A complementary secondary HEX color code" },
-                fontFamily: { type: Type.STRING, description: "Font style suggestion: 'sans', 'serif', or 'mono'" }
+                backgroundColor: { type: Type.STRING, description: "The main background color HEX for the entire page" },
+                textColor: { type: Type.STRING, description: "The main text color HEX for optimal contrast against the background" },
+                fontFamily: { type: Type.STRING, enum: ["inter", "outfit", "playfair", "spaceGrotesk", "jakarta"], description: "The selected font family identifier" },
+                borderRadius: { type: Type.STRING, enum: ["none", "sm", "md", "full"], description: "The border radius scale for elements" }
               },
-              required: ["primaryColor", "secondaryColor", "fontFamily"]
+              required: ["primaryColor", "secondaryColor", "backgroundColor", "textColor", "fontFamily", "borderRadius"]
             },
             hero: {
               type: Type.OBJECT,
