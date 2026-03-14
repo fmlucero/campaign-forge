@@ -22,6 +22,16 @@ In fast-paced creative and technical environments, moving from concept to launch
 - **Dynamic JIT Tailwind Compilation:** UI consumes AI-generated tokens via standard React inline styles and a strict font mapping dictionary to safely inject `next/font` variables (`Inter`, `Outfit`, `Playfair`, `Space Grotesk`, `Jakarta`) directly into the Tailwind V4 compilation layer.
 - **Glassmorphic Editor:** The main control panel features a modern, premium "Dark SaaS" aesthetic with subtle borders and shadows to reduce cognitive load while managing complex prompts.
 
+## 🆕 Recent Updates & Improvements
+
+In this latest iteration, we've focused on UI/UX excellence and model reliability:
+
+- **💎 Professional Welcome Page:** A high-impact landing page designed to "wow" recruiters, featuring Framer Motion animations, glassmorphism, and a clear visualization of the technical architecture.
+- **🖥️ Full-Screen Preview Mode:** The preview area now automatically expands to full-screen upon generation, hiding the sidebar and top navigation for a more immersive and professional "live" result.
+- **✨ Animated Loading Transitions:** Implementation of a dynamic "scale-up" effect during the "Crafting" state, making the transition from brief to page feel fluid and intentional.
+- **🌍 Enhanced Language Detection:** Refined the AI orchestration layer with a strict Language Protocol and dedicated schema-based validation. This guarantees that generated content matches the input language (English/Spanish) with 100% consistency.
+- **🧼 UI Polishing:** Deactivated development indicators and refined typography scales across the application to maintain a premium, production-ready feel.
+
 ## 🛠️ Getting Started
 
 Ensure you have your environment variables configured. Create a `.env.local` file at the root:
