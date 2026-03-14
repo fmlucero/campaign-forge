@@ -1,6 +1,6 @@
-# GrowthOps Copilot
+# Campaign Forge
 
-GrowthOps Copilot is an internal AI-powered SaaS tool designed to accelerate the ideation and deployment of digital marketing assets. By leveraging Large Language Models (LLMs) and modern web technologies, it transforms a single product brief or concept into a fully fleshed-out campaign pipeline, including landing page structures, copy variations, and email sequences.
+Campaign Forge is an internal AI-powered SaaS tool designed to accelerate the ideation and deployment of digital marketing assets. By leveraging Large Language Models (LLMs) and modern web technologies, it transforms a single product brief or concept into a fully fleshed-out campaign pipeline, including landing page structures, copy variations, and email sequences.
 
 ## 🚀 Purpose and Value Proposition
 
