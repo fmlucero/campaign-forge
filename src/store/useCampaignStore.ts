@@ -30,18 +30,25 @@ export interface LandingData {
 
 interface CampaignState {
   isGenerating: boolean;
+  isSidebarOpen: boolean;
   landingData: LandingData | null;
   error: string | null;
   generateCampaign: (brief: Record<string, string>) => Promise<void>;
+  setSidebarOpen: (isOpen: boolean) => void;
+  toggleSidebar: () => void;
 }
 
 export const useCampaignStore = create<CampaignState>((set) => ({
   isGenerating: false,
+  isSidebarOpen: true,
   landingData: null,
   error: null,
   
+  setSidebarOpen: (isOpen) => set({ isSidebarOpen: isOpen }),
+  toggleSidebar: () => set((state) => ({ isSidebarOpen: !state.isSidebarOpen })),
+
   generateCampaign: async (brief) => {
-    set({ isGenerating: true, error: null });
+    set({ isGenerating: true, error: null, isSidebarOpen: false });
     
     try {
       const response = await fetch("/api/generate", {
@@ -55,7 +62,11 @@ export const useCampaignStore = create<CampaignState>((set) => ({
       }
       
       const data = await response.json();
-      set({ landingData: data.landingPage, isGenerating: false });
+      set({ 
+        landingData: data.landingPage, 
+        isGenerating: false,
+        isSidebarOpen: false // Auto-hide sidebar on success
+      });
     } catch (error: any) {
       set({ error: error.message || "An error occurred", isGenerating: false });
     }

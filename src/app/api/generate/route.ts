@@ -18,28 +18,23 @@ export async function POST(request: Request) {
     }
 
     const prompt = `
-You are an expert digital marketing copywriter and conversion rate optimization specialist, acting as both an Art Director and a Copywriter.
+You are an expert digital marketing copywriter and conversion rate optimization specialist.
 I need you to generate a high-converting landing page copy based on the following brief.
 
-CRUCIAL INSTRUCTION ON LANGUAGE:
-Detect the language of the provided brief and generate all the landing page copy (including titles, subtitles, and UI labels) STRICTLY in that same language. Do not mix languages.
+LANGUAGE PROTOCOL:
+1. ANALYZE the language used in the "Brief Details" below.
+2. DETECT if it is English, Spanish, or another language.
+3. GENERATE ALL content (headlines, features, CTAs, author roles, UI labels) STRICTLY in that detected language.
+4. Do not translate English inputs into Spanish or vice versa. If I write in English, you respond in English. If I write in Spanish, you respond in Spanish.
 
-CRUCIAL INSTRUCTION ON THEMING (V3 Extreme Adaptability):
-Instead of just a primary color, you must design a complete, cohesive theme tailored to the product's identity. 
-- You must decide if the landing page should be dark mode or light mode based on the industry.
-- Return a full HEX color palette including: primaryColor, secondaryColor, backgroundColor, and textColor.
-- If it's a dark theme, backgroundColor should be dark (e.g., #0f172a) and textColor light (e.g., #f1f5f9). 
-- If it's a light theme, backgroundColor should be bright (e.g., #f8fafc) and textColor dark (e.g., #0f172a).
-- Select a specific font pairing ('inter', 'outfit', 'playfair', 'spaceGrotesk', or 'jakarta') that best matches the brand vibe. For example, 'playfair' for luxury/fashion, 'spaceGrotesk' for cutting-edge tech.
-- Decide the 'borderRadius' for buttons and cards: 'none' (sharp, brutalist, high-end fashion), 'sm' (standard tech), 'md' (friendly SaaS), or 'full' (modern consumer apps).
+THEMING (V3 Extreme Adaptability):
+- Design a complete theme (Dark/Light mode, HEX palette, font pairing, borderRadius) tailored to the product's identity.
 
 Brief Details:
 - Brand Name: ${brief.brand}
 - Product/Service: ${brief.product}
 - Primary Goal: ${brief.goal}
 - Target Audience & Key Benefits: ${brief.target}
-
-Your response must be extremely tailored to maximize conversions, adopting the correct aesthetic profile for the stated goal.
 `;
 
     const responseSchema = {
@@ -48,6 +43,7 @@ Your response must be extremely tailored to maximize conversions, adopting the c
         landingPage: {
           type: Type.OBJECT,
           properties: {
+            language: { type: Type.STRING, description: "The detected language of the brief, e.g. 'en-US' or 'es-ES'" },
             theme: {
               type: Type.OBJECT,
               properties: {
@@ -102,7 +98,7 @@ Your response must be extremely tailored to maximize conversions, adopting the c
               required: ["headline", "buttonText"]
             }
           },
-          required: ["theme", "hero", "featuresTitle", "featuresSubtitle", "features", "socialProof", "footerCta"]
+          required: ["language", "theme", "hero", "featuresTitle", "featuresSubtitle", "features", "socialProof", "footerCta"]
         }
       },
       required: ["landingPage"]

@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Send, Sparkles, LayoutTemplate, Type, MousePointerClick } from "lucide-react";
+import { Send, Sparkles, LayoutTemplate, Type, MousePointerClick, Home, X } from "lucide-react";
 import { useCampaignStore } from "@/store/useCampaignStore";
+import Link from "next/link";
 
 export default function Sidebar({ className }: { className?: string }) {
-  const { isGenerating, generateCampaign } = useCampaignStore();
+  const { isGenerating, generateCampaign, setSidebarOpen } = useCampaignStore();
   const [formData, setFormData] = useState({
     brand: "",
     product: "",
@@ -16,7 +17,7 @@ export default function Sidebar({ className }: { className?: string }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.brand || !formData.product) return;
-    
+
     // Trigger generation via store
     generateCampaign(formData);
   };
@@ -27,18 +28,30 @@ export default function Sidebar({ className }: { className?: string }) {
 
   return (
     <aside className={`flex flex-col h-full bg-[#fafafa] dark:bg-[#0a0a0a] border-r border-slate-200 dark:border-white/10 ${className}`}>
-      <div className="p-6 border-b border-slate-200 dark:border-white/10">
+      <div className="p-6 border-b border-slate-200 dark:border-white/10 relative">
+        <button 
+          onClick={() => setSidebarOpen(false)}
+          className="absolute top-6 right-6 p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+          title="Close Sidebar"
+        >
+          <X className="w-4 h-4" />
+        </button>
         <div className="flex items-center gap-2 mb-2">
           <div className="bg-blue-600 p-2 rounded-lg shadow-inner shadow-blue-400/20">
             <Sparkles className="w-5 h-5 text-white" />
           </div>
           <h2 className="text-xl font-outfit font-bold tracking-tight text-slate-900 dark:text-zinc-50">
-            GrowthOps
+            CampaignForge
           </h2>
         </div>
-        <p className="text-sm text-slate-500 dark:text-zinc-400 font-medium">
-          AI Campaign Scaffolding
-        </p>
+
+        <Link
+          href="/"
+          className="mt-6 flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-blue-500 transition-colors py-1 cursor-pointer"
+        >
+          <Home className="w-3.5 h-3.5" />
+          Back to Welcome Page
+        </Link>
       </div>
 
       <div className="flex-1 overflow-y-auto p-6">

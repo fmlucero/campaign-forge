@@ -34,11 +34,9 @@ Run the development server:
 
 \`\`\`bash
 npm run dev
-# or
-yarn dev
 \`\`\`
 
-Navigate to [http://localhost:3000](http://localhost:3000) to view the application. Enter a brand name, product description, and goal, and click "Generate Campaign" to test the AI.
+Navigate to [http://localhost:3000](http://localhost:3000) to experience the professional welcome page. From there, click **"Launch The Forge"** to enter the campaign generation tool (located at `/forge`).
 
 ## 🔮 Roadmap & Iterations
 

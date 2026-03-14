@@ -1,7 +1,7 @@
 "use client";
 
 import { useCampaignStore } from "@/store/useCampaignStore";
-import { Presentation, Quote, ArrowRight, Shield, Zap, Target, TrendingUp, Sparkles, CheckCircle2 } from "lucide-react";
+import { Presentation, Quote, ArrowRight, Shield, Zap, Target, TrendingUp, Sparkles, CheckCircle2, Settings2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const fontMap: Record<string, string> = {
@@ -13,14 +13,30 @@ const fontMap: Record<string, string> = {
 };
 
 export default function PreviewArea() {
-  const { landingData, isGenerating } = useCampaignStore();
+  const { landingData, isGenerating, isSidebarOpen, setSidebarOpen } = useCampaignStore();
 
   const currentFontClass = landingData ? (fontMap[landingData.theme.fontFamily] || 'font-sans') : 'font-sans';
 
   return (
-    <div className="h-full w-full overflow-y-auto p-4 md:p-8">
+    <div className={`h-full w-full overflow-y-auto relative transition-all duration-500 ${isSidebarOpen ? 'p-4 md:p-8' : 'p-0'}`}>
+      <AnimatePresence>
+        {!isSidebarOpen && !isGenerating && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => setSidebarOpen(true)}
+            className="fixed top-8 left-8 z-50 flex items-center gap-2 px-4 py-2 bg-slate-900/80 dark:bg-white/10 backdrop-blur-md border border-white/10 rounded-full text-white text-sm font-semibold shadow-2xl hover:scale-105 transition-transform"
+          >
+            <Settings2 className="w-4 h-4 text-blue-400" />
+            Edit Design
+          </motion.button>
+        )}
+      </AnimatePresence>
       <div 
-        className={`max-w-5xl mx-auto min-h-[80vh] rounded-2xl shadow-xl overflow-hidden relative transition-colors duration-500 ${currentFontClass}`}
+        className={`mx-auto min-h-[80vh] overflow-hidden relative transition-all duration-500 ${currentFontClass} ${
+          isSidebarOpen ? 'max-w-5xl rounded-2xl shadow-xl' : 'max-w-none rounded-none shadow-none min-h-screen'
+        }`}
         style={landingData ? {
           '--theme-primary': landingData.theme.primaryColor,
           '--theme-secondary': landingData.theme.secondaryColor,
@@ -32,15 +48,21 @@ export default function PreviewArea() {
           {isGenerating ? (
             <motion.div
               key="generating"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="absolute inset-0 z-10 bg-white/50 dark:bg-slate-950/50 backdrop-blur-sm flex flex-col items-center justify-center"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.1 }}
+              transition={{ duration: 0.5 }}
+              className="absolute inset-0 z-10 bg-slate-50 dark:bg-slate-950 flex flex-col items-center justify-center"
             >
               <div className="w-16 h-16 border-4 border-blue-500/30 border-t-blue-500 rounded-full animate-spin mb-6" />
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+              <motion.h3 
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="text-2xl font-bold text-slate-900 dark:text-white mb-2"
+              >
                 Crafting your campaign...
-              </h3>
+              </motion.h3>
               <p className="text-slate-500 dark:text-slate-400 text-sm max-w-sm text-center">
                 Our AI is analyzing your brief and generating high-converting copy and structure.
               </p>
@@ -63,7 +85,7 @@ export default function PreviewArea() {
                 Fill out the brief in the sidebar and hit "Generate Campaign" to let our AI build your high-converting landing page instantly.
               </p>
             </motion.div>
-          ) : (
+          ) : landingData ? (
             <motion.div
               key="content"
               initial={{ opacity: 0, y: 20 }}
@@ -215,7 +237,7 @@ export default function PreviewArea() {
                 </div>
               </div>
             </motion.div>
-          )}
+          ) : null}
         </AnimatePresence>
       </div>
     </div>
