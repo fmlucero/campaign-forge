@@ -1,35 +1,26 @@
 "use client";
 
-import { useState } from "react";
 import { Send, Sparkles, LayoutTemplate, Type, MousePointerClick, Home, X } from "lucide-react";
 import { useCampaignStore } from "@/store/useCampaignStore";
 import Link from "next/link";
 
 export default function Sidebar({ className }: { className?: string }) {
-  const { isGenerating, generateCampaign, setSidebarOpen } = useCampaignStore();
-  const [formData, setFormData] = useState({
-    brand: "",
-    product: "",
-    target: "",
-    goal: "",
-  });
+  const { isGenerating, generateCampaign, setSidebarOpen, briefData, setBriefData } = useCampaignStore();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.brand || !formData.product) return;
-
-    // Trigger generation via store
-    generateCampaign(formData);
+    if (!briefData.brand || !briefData.product) return;
+    generateCampaign();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setBriefData({ [e.target.name]: e.target.value });
   };
 
   return (
     <aside className={`flex flex-col h-full bg-[#fafafa] dark:bg-[#0a0a0a] border-r border-slate-200 dark:border-white/10 ${className}`}>
       <div className="p-6 border-b border-slate-200 dark:border-white/10 relative">
-        <button 
+        <button
           onClick={() => setSidebarOpen(false)}
           className="absolute top-6 right-6 p-1 rounded-md text-slate-400 hover:text-slate-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
           title="Close Sidebar"
@@ -64,7 +55,7 @@ export default function Sidebar({ className }: { className?: string }) {
             <input
               type="text"
               name="brand"
-              value={formData.brand}
+              value={briefData.brand}
               onChange={handleChange}
               placeholder="e.g. Acme Corp"
               className="w-full px-3 py-2 bg-white dark:bg-[#111] border border-slate-300 dark:border-white/10 dark:placeholder:text-zinc-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm dark:text-zinc-200 transition-all"
@@ -80,7 +71,7 @@ export default function Sidebar({ className }: { className?: string }) {
             <input
               type="text"
               name="product"
-              value={formData.product}
+              value={briefData.product}
               onChange={handleChange}
               placeholder="e.g. AI-powered writing assistant"
               className="w-full px-3 py-2 bg-white dark:bg-[#111] border border-slate-300 dark:border-white/10 dark:placeholder:text-zinc-600 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm dark:text-zinc-200 transition-all"
@@ -95,14 +86,16 @@ export default function Sidebar({ className }: { className?: string }) {
             </label>
             <select
               name="goal"
-              value={formData.goal}
-              onChange={(e: any) => handleChange(e)}
+              value={briefData.goal}
+              onChange={handleChange}
               className="w-full px-3 py-2 bg-white dark:bg-[#111] border border-slate-300 dark:border-white/10 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 text-sm dark:text-zinc-200 transition-all appearance-none"
             >
               <option value="lead_gen">Lead Generation / Signups</option>
               <option value="sales">Direct Sales</option>
-              <option value="waitlist">Product Waitlist</option>
+              <option value="waitlist">Pre-launch / Waitlist</option>
               <option value="awareness">Brand Awareness</option>
+              <option value="reengagement">Re-engagement / Win-back</option>
+              <option value="event">Event / Launch Promotion</option>
             </select>
           </div>
 
@@ -112,7 +105,7 @@ export default function Sidebar({ className }: { className?: string }) {
             </label>
             <textarea
               name="target"
-              value={formData.target}
+              value={briefData.target}
               onChange={handleChange}
               placeholder="Who is this for and why should they care?"
               rows={4}
